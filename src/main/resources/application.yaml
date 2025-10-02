@@ -1,0 +1,26 @@
+spring:
+  application:
+    name:
+      playlist
+  datasource:
+    url: jdbc:mysql://${DEV_MYSQL_HOST:localhost}:${DEV_MYSQL_PORT:3306}/${DEV_DB_NAME:playlist}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${DEV_MYSQL_USERNAME:root}
+    password: ${DEV_MYSQL_PASSWORD:1234}
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        hibernate.format_sql: true
+        hibernate.highlight_sql: true      # ANSI ?? ?????(Hibernate 6+)
+        hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 200
+        default_batch_fetch_size: 100
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQLDialect
+    defer-datasource-initialization: false #schema.sql/data.sql ? ??? ???? ?? ??? ??
+    #false? DataSource? ?????? ??, JPA ????? ?? ???? ??
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: trace
